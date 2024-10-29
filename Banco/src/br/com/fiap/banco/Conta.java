@@ -2,10 +2,21 @@ package br.com.fiap.banco;
 
 public class Conta {
 
-	public String nomeCliente;
+	public Conta(String nomeCliente, String cpf, long numeroConta) {
+		this.nomeCliente = nomeCliente;
+		this.cpf = cpf;
+		this.numeroConta = numeroConta;
+		// construtor
+	}
+
+	protected String nomeCliente;
 	public String cpf;
 	public long numeroConta;
-	public double saldo;
+	public double saldo = 0;
+
+	public String getCpf() {
+		return cpf;
+	}
 
 	public boolean sacar(double valor) {
 		boolean validacao;
@@ -23,14 +34,14 @@ public class Conta {
 	}
 
 	public double consultaSaldo() {
-	return saldo;
+		return saldo;
 	}
 
 	public void trasferir(double valor, Conta conta) {
-	
+
 		if (this.sacar(valor)) {
-			conta.depositar(valor); 
-		} 
+			conta.depositar(valor);
+		}
 
 	}
 }
