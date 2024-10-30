@@ -1,23 +1,53 @@
 package br.com.fiap.banco;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Cliente {
-public String nomeCliente, cpf;
+	private String nomeCliente, cpf;
+	private Date dataNasc = new Date();
 
-public Cliente(String nomeCliente, String cpf) {
+	
 
-	this.nomeCliente = nomeCliente;
-	this.cpf = cpf;
-}
+	
+	
+	
+	
+	/*
+	███╗░░░███╗███████╗████████╗░█████╗░██████╗░░█████╗░░██████╗
+	████╗░████║██╔════╝╚══██╔══╝██╔══██╗██╔══██╗██╔══██╗██╔════╝
+	██╔████╔██║█████╗░░░░░██║░░░██║░░██║██║░░██║██║░░██║╚█████╗░
+	██║╚██╔╝██║██╔══╝░░░░░██║░░░██║░░██║██║░░██║██║░░██║░╚═══██╗
+	██║░╚═╝░██║███████╗░░░██║░░░╚█████╔╝██████╔╝╚█████╔╝██████╔╝
+	╚═╝░░░░░╚═╝╚══════╝░░░╚═╝░░░░╚════╝░╚═════╝░░╚════╝░╚═════╝░*/
+	
+	public Cliente(String nomeCliente, String cpf, String dataNasc) {
 
+		this.nomeCliente = nomeCliente;
+		this.cpf = cpf;
+		
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
+		try {
+			this.dataNasc = formato.parse(dataNasc);
+		} catch (ParseException e) {
+			System.err.println("Formato de data inválido");
+			e.printStackTrace();
+		}
 
-public String getNomeCliente() {
-	return nomeCliente;
-}
+	}
 
-public String getCpf() {
-	return cpf;
-}
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
 
+	public String getCpf() {
+		return cpf;
+	}
 
+	public Date getDataNasc() {
+		return dataNasc;
+	}
+	
 }

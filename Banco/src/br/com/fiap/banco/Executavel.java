@@ -8,12 +8,12 @@ public class Executavel {
         Scanner sc = new Scanner(System.in);
 
         // Criando instâncias de Cliente
-        Cliente cliente1 = new Cliente("Gahen", "539.021.268-17");
-        Cliente cliente2 = new Cliente("Vitu", "123456789");
+        Cliente cliente1 = new Cliente("Gahen", "539.021.268-17","11/05/2007");
+        Cliente cliente2 = new Cliente("Vitu", "123456789","12/12/1212");
 
         // Criando contas com os clientes
-        Conta C01 = new Conta(cliente1, "1");
-        Conta C02 = new Conta(cliente2, "2");
+        Conta C01 = new Conta(cliente1, "1002");
+        Conta C02 = new Conta(cliente2, "2217");
 
         int opcao = -1;
         while (opcao != 0) {
