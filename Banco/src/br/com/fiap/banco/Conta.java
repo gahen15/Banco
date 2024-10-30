@@ -1,47 +1,75 @@
 package br.com.fiap.banco;
 
+import java.util.Scanner;
+
 public class Conta {
+    private Scanner sc = new Scanner(System.in);
+    private Cliente cliente; // Presumindo que Cliente é uma classe definida
+    private String numeroConta;
+    private double saldo;
 
-	public Conta(String nomeCliente, String cpf, long numeroConta) {
-		this.nomeCliente = nomeCliente;
-		this.cpf = cpf;
-		this.numeroConta = numeroConta;
-		// construtor
-	}
+    public Conta(Cliente cliente, String numeroConta) {
+        this.cliente = cliente;
+        this.numeroConta = numeroConta;
+        this.saldo = 0.0; // Saldo inicial
+    }
 
-	protected String nomeCliente;
-	public String cpf;
-	public long numeroConta;
-	public double saldo = 0;
+    public void ConsultaSaldo() {
+        System.out.printf("O saldo na sua conta atual é: R$ %.2f%n", this.saldo);
+    }
 
-	public String getCpf() {
-		return cpf;
-	}
+    public void Deposito() {
+        System.out.println("Quanto você deseja depositar?");
+        double valor = sc.nextDouble();
+        
+        if (valor <= 0) {
+            System.out.println("Valor de depósito inválido! Deve ser maior que zero.");
+            return; // Retorna para evitar depósito inválido
+        }
 
-	public boolean sacar(double valor) {
-		boolean validacao;
-		if (saldo >= valor) {
-			validacao = true;
-		} else {
-			validacao = false;
-		}
-		return validacao;
-	}
+        this.saldo += valor;
+        System.out.printf("\nDepósito realizado com sucesso!\nSaldo antes do depósito: R$ %.2f%n", this.saldo - valor);
+        System.out.printf("Valor do depósito: R$ %.2f%n", valor);
+        System.out.printf("Saldo atual: R$ %.2f%n", this.saldo);
+    }
 
-	public void depositar(double quantidade) {
-		saldo = saldo + quantidade;
+    public void Saque() {
+        System.out.println("Quanto você deseja sacar?");
+        double valor = sc.nextDouble();
+        
+        if (valor <= 0) {
+            System.out.println("Valor de saque inválido! Deve ser maior que zero.");
+            return; // Retorna para evitar saque inválido
+        }
 
-	}
+        if (this.saldo < valor) {
+            System.out.println("Impossível realizar operação: Saldo Insuficiente.");
+        } else {
+            this.saldo -= valor;
+            System.out.printf("Operação realizada com sucesso!\nSaldo antes do saque: R$ %.2f%n", this.saldo + valor);
+            System.out.printf("Valor do saque: R$ %.2f%n", valor);
+            System.out.printf("Saldo atual: R$ %.2f%n", this.saldo);
+        }
+    }
 
-	public double consultaSaldo() {
-		return saldo;
-	}
+    public void Transferencia(Conta contaDestino) {
+        System.out.println("Quanto você deseja transferir?");
+        double valor = sc.nextDouble();
 
-	public void trasferir(double valor, Conta conta) {
+        if (valor <= 0) {
+            System.out.println("Valor de transferência inválido! Deve ser maior que zero.");
+            return; // Retorna para evitar transferência inválida
+        }
 
-		if (this.sacar(valor)) {
-			conta.depositar(valor);
-		}
-
-	}
+        if (this.saldo < valor) {
+            System.out.println("Impossível realizar operação: Saldo Insuficiente.");
+        } else {
+            this.saldo -= valor;
+            contaDestino.saldo += valor; // Adiciona o valor à conta de destino
+            System.out.printf("Transferência realizada com sucesso!\nValor da transferência: R$ %.2f%n", valor);
+            System.out.printf("Saldo atual: R$ %.2f%n", this.saldo);
+            System.out.printf("Saldo na conta destino: R$ %.2f%n", contaDestino.saldo);
+        }
+    }
 }
+ 

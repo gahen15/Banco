@@ -1,62 +1,76 @@
 package br.com.fiap.banco;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Executavel {
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Conta C01 = new Conta("Gahen", "539.021.268-17", 1);
-        Conta C02 = new Conta("Vitu", "123456789", 2);
-        
-        int escolha;
 
-        do {
-            System.out.println("Escolha a opÁ„o: \n|1| Sacar \n|2| Depositar \n|3| Verificar Saldo\n|4| Transferir\n|5| Obter CPF\n|0| Sair\n");
-            escolha = sc.nextInt();
+        // Criando inst√¢ncias de Cliente
+        Cliente cliente1 = new Cliente("Gahen", "539.021.268-17");
+        Cliente cliente2 = new Cliente("Vitu", "123456789");
 
-            switch (escolha) {
-                case 1:
-                    System.out.println("Digite o valor que deseja sacar: ");
-                    double valorSaque = sc.nextDouble();
-                    
-                    if (C01.sacar(valorSaque)) {
-                        C01.saldo -= valorSaque;
-                        System.out.println("Saldo antes do Saque: R$ " + (C01.saldo + valorSaque));
-                        System.out.println("Saldo apÛs Saque: R$ " + C01.saldo);
-                    } else {
-                        System.out.println("Saldo insuficiente.");
-                        System.out.println("Saldo: R$ " + C01.saldo);
-                    }
-                    break;
-                case 2:
-                    System.out.println("Digite a quantidade que deseja depositar: ");
-                    double valorDeposito = sc.nextDouble();
-                    C01.depositar(valorDeposito);
-                    
-                    System.out.println("Saldo antes do depÛsito: R$ " + (C01.saldo - valorDeposito));
-                    System.out.println("Saldo apÛs depÛsito: R$ " + C01.saldo);
-                    break;
-                case 3:
-                    System.out.println("Seu saldo atual È: R$ " + C01.consultaSaldo());
-                    break;
-                case 4:
-                    System.out.println("Digite qual valor vocÍ deseja transferir: ");
-                    double valorTransf = sc.nextDouble();
-                    C01.trasferir(valorTransf, C02);
-                    System.out.println("Seu saldo atual: R$ " + C01.saldo);
-                    break;
-                case 5:
-                    System.out.println("O CPF da conta È: " + C01.getCpf()); // Obtendo o CPF
-                    break;
-                case 0:
-                    System.out.println("Saindo...");
-                    break;
-                default:
-                    System.out.println("OpÁ„o inv·lida!");
-                    break;
+        // Criando contas com os clientes
+        Conta C01 = new Conta(cliente1, "1");
+        Conta C02 = new Conta(cliente2, "2");
+
+        int opcao = -1;
+        while (opcao != 0) {
+            System.out.println("\n\nQual opera√ß√£o deseja realizar?\n");
+            System.out.println("|1| Verificar saldo da Conta 1 (Gahen)");
+            System.out.println("|2| Depositar na Conta 1 (Gahen)");
+            System.out.println("|3| Saque na Conta 1 (Gahen)");
+            System.out.println("|4| Transferir da Conta 1 (Gahen) para a Conta 2 (Vitu)");
+            System.out.println("\n\n|5| Verificar saldo da Conta 2 (Vitu)");
+            System.out.println("|6| Depositar na Conta 2 (Vitu)");
+            System.out.println("|7| Saque na Conta 2 (Vitu)");
+            
+            System.out.println("|8| Transferir da Conta 2 (Vitu) para a Conta 1 (Gahen)");
+            System.out.println("\n\n|0| Sair");
+            System.out.print("\nDigite a op√ß√£o: ");
+
+            try {
+                opcao = sc.nextInt();
+                sc.nextLine(); // Limpa o buffer
+
+                switch (opcao) {
+                    case 1:
+                        C01.ConsultaSaldo();
+                        break;
+                    case 2:
+                        C01.Deposito();
+                        break;
+                    case 3:
+                        C01.Saque();
+                        break;
+                    case 5:
+                        C02.ConsultaSaldo();
+                        break;
+                    case 6:
+                        C02.Deposito();
+                        break;
+                    case 7:
+                        C02.Saque();
+                        break;
+                    case 4:
+                        C01.Transferencia(C02);
+                        break;
+                    case 8:
+                        C02.Transferencia(C01);
+                        break;
+                    case 0:
+                        System.out.println("Tchau! ‡ºº „Å§ ‚óï_‚óï ‡ºΩ„Å§");
+                        break;
+                    default: 
+                        System.out.println("Op√ß√£o inv√°lida!");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada inv√°lida! Por favor, digite um n√∫mero.");
+                sc.nextLine(); // Limpa o buffer
             }
-        } while (escolha != 0); // O loop continua atÈ que a opÁ„o 0 seja escolhida.
+        }
 
         sc.close();
     }
