@@ -3,13 +3,13 @@ package br.com.fiap.banco;
 import java.util.Scanner;
 
 public class Conta {
-    private Scanner sc = new Scanner(System.in);
-    private Cliente cliente; // Presumindo que Cliente é uma classe definida
-    private String numeroConta;
-    private double saldo;
+    protected Scanner sc = new Scanner(System.in);
+    protected Cliente cliente; // Presumindo que Cliente é uma classe definida
+    protected String numeroConta;
+    protected double saldo;
 
     public Conta(Cliente cliente, String numeroConta) {
-        this.cliente = cliente;
+    	this.cliente = cliente;
         this.numeroConta = numeroConta;
         this.saldo = 0.0; // Saldo inicial
     }

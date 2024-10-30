@@ -5,8 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Cliente {
-	private String nomeCliente, cpf;
-	private Date dataNasc = new Date();
+	protected String nomeCliente, cpf;
+	protected Date dataNasc = new Date();
 
 	
 
