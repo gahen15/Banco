@@ -2,7 +2,7 @@ package br.com.fiap.banco;
 
 import java.util.Scanner;
 
-public class Conta {
+public abstract class Conta {
     protected Scanner sc = new Scanner(System.in);
     protected Cliente cliente; // Presumindo que Cliente é uma classe definida
     protected String numeroConta;
@@ -14,12 +14,7 @@ public class Conta {
         this.saldo = 0.0; // Saldo inicial
     }
     
-    public void ConsultaSaldo() {
-        System.out.printf("O saldo na sua conta atual é: R$ %.2f%n", this.saldo);
-        System.out.println("Número da Conta: "+ numeroConta);
-        System.out.println("Nome do cliente: " + cliente.getNomeCliente());
-        System.out.println("Data de nascimento: "+ cliente.getDataNasc());
-    }
+    public abstract void ConsultaSaldo();
 
     public void Deposito() {
         System.out.println("Quanto você deseja depositar?");

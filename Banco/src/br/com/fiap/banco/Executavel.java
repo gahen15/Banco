@@ -12,8 +12,8 @@ public class Executavel {
         Cliente cliente2 = new Cliente("Vitu", "123456789","12/12/1212");
 
         // Criando contas com os clientes
-        Conta C01 = new Conta(cliente1, "1002");
-        Conta C02 = new Conta(cliente2, "2217");
+        ContaCorrente C01 = new ContaCorrente(cliente1, "1002");
+        ContaCorrente C02 = new ContaCorrente(cliente2, "2217");
 
         int opcao = -1;
         while (opcao != 0) {
@@ -27,6 +27,8 @@ public class Executavel {
             System.out.println("|7| Saque na Conta 2 (Vitu)");
             
             System.out.println("|8| Transferir da Conta 2 (Vitu) para a Conta 1 (Gahen)");
+            System.out.println("\n\n|9| Fazer investimento na Conta 1");
+            
             System.out.println("\n\n|0| Sair");
             System.out.print("\nDigite a opção: ");
 
@@ -59,6 +61,24 @@ public class Executavel {
                     case 8:
                         C02.Transferencia(C01);
                         break;
+                    case 9:
+                    	
+                    	
+                    	System.out.println("\n\n\n\n\nQue tipo de investimento de seja fazer?");
+                    	System.out.println("|1| CDB - 1%");
+                    	System.out.println("|2| LCI - 0,9%");
+                    	System.out.println("|3| LCA - 0,8%");
+                    	int tipoInvestimento = sc.nextInt();
+                    	
+                    	System.out.println("Qual valor que deseja aplicar?");
+                    	double valorAplicado = sc.nextDouble();
+                    	
+                    	C01.investir(tipoInvestimento,valorAplicado);
+                    	
+                    	
+                    	
+                    	
+                    	break;
                     case 0:
                         System.out.println("Tchau! ༼ つ ◕_◕ ༽つ");
                         break;
